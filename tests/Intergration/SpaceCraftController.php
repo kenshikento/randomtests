@@ -24,13 +24,7 @@ class SpaceCraftController extends TestCase
 
 	}
 	
-	/*public function testShow()
-	{	
-		$this->get('/spacecraft');
-		$this->seeStatusCode(200);
-	}*/
-
-	/*public function testAdd()
+	public function testAdd()
 	{	
 		$craft = factory(SpaceCraft::class)->make();
 
@@ -45,7 +39,7 @@ class SpaceCraftController extends TestCase
             ->seeJson([
             	0 => 201,
         ]);
-	}*/
+	}
 
 	public function testUpdate()
 	{	
