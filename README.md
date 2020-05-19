@@ -1,5 +1,4 @@
-Xanda Test
-
+Random test
 All spaceshifts allowing filtering name / class / status
 
 {
