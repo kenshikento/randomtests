@@ -110,7 +110,7 @@ class SpaceCraftController extends Controller
             'status' => 'required',
         ];
 
-        if (count($request->armaments) > 0) {
+        if ($request->armaments) {
         	$data['armaments.*.title'] = 'required | exists:App\Armaments,title';
         	$data['armaments.*.qty'] = 'required';
         }
@@ -136,7 +136,7 @@ class SpaceCraftController extends Controller
 
      	// TODO: Needs to check if weapons currently exist at the moment
      	// it will just add on regardless
-     	if (count($request->armaments)) {
+     	if ($request->armaments) {
      		$weapons = [];
 	        foreach ($request->armaments as $armament) {
 	        	if ($craft->armaments()->where('title',$armament['title'])->first()) {
