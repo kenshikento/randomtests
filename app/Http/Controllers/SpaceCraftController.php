@@ -35,7 +35,13 @@ class SpaceCraftController extends Controller
 
 
 		if (count($craft->armaments()->get()) > 0) {
-			$craft->armaments = $craft->armaments()->get();
+            $armaments = $craft->armaments()->get();
+            
+            foreach ($armaments as $arma) {
+                $arma->qty = $arma->pivot->qty;
+            }
+
+            $craft->armaments = $armaments;
 		} 
 
         if (!$craft) {
@@ -134,15 +140,20 @@ class SpaceCraftController extends Controller
 
         $craft->save();
 
-     	// TODO: Needs to check if weapons currently exist at the moment
-     	// it will just add on regardless
      	if ($request->armaments) {
      		$weapons = [];
 	        foreach ($request->armaments as $armament) {
-	        	if ($craft->armaments()->where('title',$armament['title'])->first()) {
-	        		return;
+                $spacecraft = $craft->armaments()->where('title',$armament['title'])->first();
+	        	
+                if ($spacecraft && $spacecraft->qty === $armament['qty']) {
+	        		continue;
 	        	}
 
+                if ($spacecraft && $spacecraft->qty != $armament['qty']) {
+                    $craft->armaments()->updateExistingPivot($spacecraft->id, ['qty' => $armament['qty']]);
+                    continue;
+                }
+                
 	        	$weapons[] = new Armaments($armament);
 	        }
 

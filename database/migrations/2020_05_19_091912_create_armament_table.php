@@ -17,10 +17,6 @@ class CreateArmamentTable extends Migration
             $table->id();
 
             $table->string('title');
-            $table->string('qty');
-
-            $table->unsignedBigInteger('space_craft_id');
-            $table->foreign('space_craft_id')->references('id')->on('space_crafts')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

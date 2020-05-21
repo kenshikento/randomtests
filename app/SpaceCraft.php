@@ -6,6 +6,7 @@ use App\Armaments;
 use App\CraftType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SpaceCraft extends Model
@@ -25,17 +26,23 @@ class SpaceCraft extends Model
      * @var array
      */
     protected $hidden   = [
-        'crafttypes_id',
+        'crafttypes_id', 'pivot'
     ];
 
     /**
      * Relationship between spacecraft and many armaments
-     * TODO: needs changing to MANY TO MANY
      * @return Hasmany 
      */
-    public function armaments() : HasMany
+    public function armaments() : BelongsToMany
     {
-        return $this->hasMany(Armaments::class);
+        return $this->belongsToMany(
+            Armaments::class,
+            'armament_to_craft_pivot',
+            'space_craft_id',
+            'armament_id'
+        )
+        ->withPivot('qty')
+        ;
     }
 
     /**

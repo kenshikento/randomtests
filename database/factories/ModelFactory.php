@@ -46,7 +46,7 @@ $factory->define(SpaceCraft::class, function (Faker $faker) {
 $factory->define(Armaments::class, function (Faker $faker) {
     return [
         'title' => $faker->name,
-        'qty' => (string)rand(1,10000000000),
-        'space_craft_id' => rand(1,10)
+        //'qty' => (string)rand(1,10000000000),
+        //'space_craft_id' => rand(1,10)
     ];
 });

@@ -24,7 +24,7 @@ class SpaceCraftController extends TestCase
 
 	}
 	
-	public function testAdd()
+	/*public function testAdd()
 	{	
 		$craft = factory(SpaceCraft::class)->make();
 
@@ -39,13 +39,13 @@ class SpaceCraftController extends TestCase
             ->seeJson([
             	0 => 201,
         ]);
-	}
+	}*/
 
 	public function testUpdate()
 	{	
 		$faker = app(Generator::class);
 
-		$craft = SpaceCraft::inRandomOrder()->first();
+		$craft = SpaceCraft::first();
 		$id = $craft->id;
 
 		$crafttype = CraftTypes::find(1);
@@ -60,6 +60,8 @@ class SpaceCraftController extends TestCase
 			'value' => rand(1,3000000),
 			'craftname' => $crafttype->name,
 		];
+
+		$weapons->qty = 4045;
 
 		$data['armaments'][] = $weapons->toArray();
 

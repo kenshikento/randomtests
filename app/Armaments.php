@@ -5,6 +5,7 @@ namespace App;
 use App\SpaceCraft;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Armaments extends Model
 {
@@ -14,7 +15,7 @@ class Armaments extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'qty', 'spacecraft_id'
+        'title', 'qty',
     ];
 
     /**
@@ -23,15 +24,15 @@ class Armaments extends Model
      * @var array
      */
     protected $hidden   = [
-        'created_at', 'updated_at', 'id', 'space_craft_id'
+        'created_at', 'updated_at', 'id', 'pivot'
     ];
 
     /**
      * Relationship between Armaments and spacecrafts 
      * @return BelongsTo 
      */
-    public function spacecraft() : BelongsTo
+    public function spacecraft() : BelongsToMany
     {
-        return $this->belongsTo(SpaceCraft::class);
+        return $this->belongsToMany(SpaceCraft::class);
     }
 }

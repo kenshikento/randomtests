@@ -52,6 +52,8 @@ Create new spaceship
 }
 
 
+./vendor/bin/phpunit tests/Integration/SpaceCraftController.php
+
 Edit update spaceship
 
 {
@@ -66,3 +68,4 @@ Delete spaceship
 Under Assumption that 1 space ship will only have one type
 
 // IDEALLY Weapons should be MANY TO MANY Relationship with pivot table
+php -S localhost:8000 -t public
