@@ -17,7 +17,7 @@ class SpaceCraft extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'status', 'image', 'crew', 'value', 'crafttypes_id'
+        'name', 'status', 'image', 'crew', 'value', 'craft_types_id'
     ];
 
     /**
@@ -26,7 +26,7 @@ class SpaceCraft extends Model
      * @var array
      */
     protected $hidden   = [
-        'crafttypes_id', 'pivot'
+        'craft_types_id', 'pivot', 'created_at', 'updated_at'
     ];
 
     /**
@@ -51,6 +51,6 @@ class SpaceCraft extends Model
      */
     public function craftTypes() : BelongsTo
     {
-        return $this->belongsTo(CraftTypes::class, 'crafttypes_id');
+        return $this->belongsTo(CraftTypes::class, 'craft_types_id');
     }
 }

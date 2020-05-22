@@ -22,8 +22,8 @@ class CreateSpacecraftTable extends Migration
             $table->bigInteger('value');
             $table->string('status');
 
-            $table->unsignedBigInteger('crafttypes_id');
-            $table->foreign('crafttypes_id')->references('id')->on('crafttypes')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('craft_types_id');
+            $table->foreign('craft_types_id')->references('id')->on('crafttypes')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

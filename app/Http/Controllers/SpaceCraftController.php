@@ -68,7 +68,7 @@ class SpaceCraftController extends Controller
                 'status' => 'required',
                 'craftname' => 'required | exists:App\CraftTypes,name',
                 'armaments.*.title' => 'required | exists:App\Armaments,title',
-                'armaments.*.qty' => 'required',                              
+                'armaments.*.qty' => 'required | numeric',                              
             ]
         );
 
@@ -100,7 +100,7 @@ class SpaceCraftController extends Controller
      * @param  Comment  $commentID
      * @return Response Symfony\Component\HttpFoundation\Response;
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) : Response
     {
         $craft = SpaceCraft::find($id);
 
@@ -118,7 +118,7 @@ class SpaceCraftController extends Controller
 
         if ($request->armaments) {
         	$data['armaments.*.title'] = 'required | exists:App\Armaments,title';
-        	$data['armaments.*.qty'] = 'required';
+        	$data['armaments.*.qty'] = 'required | numeric';
         }
 
         if ($request->craftname) {
@@ -161,5 +161,65 @@ class SpaceCraftController extends Controller
      	}
         
         return response()->json(['data' => 'Successfully Updated SpaceShips Info'], 200);
+    }
+
+    /**
+     * Delete Endpoint for space crafts
+     * @return Response
+     */
+    public function delete($id) : Response
+    {
+        $craft = SpaceCraft::find($id);
+
+        if (!$craft) {
+            return response()->json(['SpaceCraft Does not exist', 404]);
+        }
+
+        $craft->armaments()->detach();
+        $craft->delete();
+
+        return response()->json(['data' => 'Successfully Deleted craft :' . $id], 200);
+    }
+
+    /**
+     * search for space craft filter by class / name / status
+     * @param  Request $request
+     * @return Response
+     */
+    public function findSpaceCraft(Request $request) : Response
+    {
+        $data = [
+            'class' => 'required_without_all:name,status',
+            'name' => 'required_without_all:class,status',
+            'status' => 'required_without_all:class,name',
+        ];
+
+        $this->validate($request, $data);
+
+        $class = $request->query('class');
+        $name = $request->query('name');
+        $status = $request->query('status');
+
+        $new = new SpaceCraft();
+
+        if (!$class) {
+            $type = CraftTypes::where('name', $class)->first();
+
+            if (!$type) {
+                return response()->json(['Craft type does not exist', 404]);
+            }            
+        }
+
+        $query = $new
+            ->where('name', 'apples')
+            ->where('status', 'fixed')
+        ;        
+
+        if (!$class) {
+            $query->where('craft_types_id', $type->id);
+        }
+
+        $result = $query->get()->map->only('name','status','id');
+        return response()->json(['data' => $result], 200);
     }
 }

@@ -39,7 +39,7 @@ class SpaceCraftController extends TestCase
             ->seeJson([
             	0 => 201,
         ]);
-	}*/
+	}
 
 	public function testUpdate()
 	{	
@@ -68,5 +68,20 @@ class SpaceCraftController extends TestCase
         $this->put('/spacecraft/' . $id, $data, []);
         
         $this->seeStatusCode(200);
+	}
+*/
+	public function testDelete()
+	{
+		$craft = SpaceCraft::find(1);
+		$id = $craft->id;
+
+		$this->delete('/spacecraft/' . $id);
+
+		$this->seeStatusCode(200);
+	}
+
+	public function testFindByWhatever()
+	{
+		//
 	}
 }

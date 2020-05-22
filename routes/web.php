@@ -16,8 +16,8 @@ $router->get('/', function () use ($router) {
 });
 
 
-//$router->get('/spacecraft/', 'SpacecraftController@index');
+$router->get('/spacecraft/', 'SpacecraftController@findSpaceCraft');
 $router->post('/spacecraft/', 'SpacecraftController@store');
 $router->get('/spacecraft/{id}', 'SpacecraftController@show');
 $router->put('/spacecraft/{id}', 'SpacecraftController@update');
-//$router->delete('/spacecraft/{id}', 'SpacecraftController@delete');
+$router->delete('/spacecraft/{id}', 'SpacecraftController@delete');
