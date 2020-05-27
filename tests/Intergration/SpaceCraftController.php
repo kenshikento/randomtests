@@ -24,7 +24,7 @@ class SpaceCraftController extends TestCase
 
 	}
 	
-	/*public function testAdd()
+	public function testAdd()
 	{	
 		$craft = factory(SpaceCraft::class)->make();
 
@@ -69,7 +69,7 @@ class SpaceCraftController extends TestCase
         
         $this->seeStatusCode(200);
 	}
-*/
+
 	public function testDelete()
 	{
 		$craft = SpaceCraft::find(1);
@@ -82,6 +82,11 @@ class SpaceCraftController extends TestCase
 
 	public function testFindByWhatever()
 	{
-		//
+		$class = 'hello';
+		$name = 'hello';
+		$status = 'apples';
+		
+		$this->get('/spacecraft/?class=' . $class . '&name=' . $name . '&status=' . $status);
+		$this->seeStatusCode(200);
 	}
 }

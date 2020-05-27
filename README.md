@@ -1,6 +1,21 @@
 Random test
-All spaceshifts allowing filtering name / class / status
 
+You are R3-D3 and were just appointed the general of the imperial fleet. Your fist action as the new
+general is to digitalise the imperial fleet inventory.
+You know that each spacecraft has the following characteristics:
+- Name
+- Class
+- Armament
+- Crew
+- Image
+- Value
+- Status
+You need to create a galactic database (using MySQL) that stores all the spacecraft’s details.
+Then create a galactic application programming interface (REST API) in droidspeak (Laravel/Lumen)
+that will handle the following:
+
+All spaceshifts allowing filtering name / class / status
+`
 {
  "data": [
  {
@@ -15,11 +30,11 @@ All spaceshifts allowing filtering name / class / status
  },
 ....
 }
-
+`
 
 
 Single Response Space craft
-
+`
 {
  "id": 1,
  "name": "Devastator",
@@ -43,29 +58,31 @@ Single Response Space craft
  },
  ]
 }
-
+`
 
 Create new spaceship
-
+`
 {
  "success": true
 }
-
-
-./vendor/bin/phpunit tests/Integration/SpaceCraftController.php
+`
 
 Edit update spaceship
-
+`
 {
  "success": true
 }
+`
 
 Delete spaceship 
+`
 {
  "success": true
 }
+`
 
-Under Assumption that 1 space ship will only have one type
+Run Locally 
+`php -S localhost:8000 -t public`
 
-// IDEALLY Weapons should be MANY TO MANY Relationship with pivot table
-php -S localhost:8000 -t public
+Integration Testing 
+`./vendor/bin/phpunit tests/Intergration/SpaceCraftController.php`

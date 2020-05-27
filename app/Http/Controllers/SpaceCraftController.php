@@ -211,8 +211,8 @@ class SpaceCraftController extends Controller
         }
 
         $query = $new
-            ->where('name', 'apples')
-            ->where('status', 'fixed')
+            ->where('name', $request->get('name'))
+            ->where('status', $request->get('status'))
         ;        
 
         if (!$class) {
