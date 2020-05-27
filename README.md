@@ -14,6 +14,15 @@ You need to create a galactic database (using MySQL) that stores all the spacecr
 Then create a galactic application programming interface (REST API) in droidspeak (Laravel/Lumen)
 that will handle the following:
 
+Code requirements:
+* Design and create a MySQL database with tables to fit all the fields and data types based on
+the examples above.
+* Ensure your code is tidy and well documented
+* All endpoints must return a JSON response
+* Add validation to all endpoints where applicable
+
+
+
 All spaceshifts allowing filtering name / class / status
 `
 {
